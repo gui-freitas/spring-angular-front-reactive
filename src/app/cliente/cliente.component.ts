@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from '../cliente.service';
 import { Cliente } from './cliente';
 
@@ -9,20 +10,21 @@ import { Cliente } from './cliente';
 })
 export class ClienteComponent implements OnInit {
 
+  formGroup: FormGroup;
+
   constructor(
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    const cliente : Cliente  = new Cliente();
-    cliente.nome = 'José da Silva';
-    cliente.cpf = '09331269994';
-
-    this.clienteService
-      .salvar(cliente)
-      .subscribe( resposta => {
-        console.log(resposta);
-      })
+    this.formGroup = this.formBuilder.group({
+      nome: ['', Validators.required],
+      cpf: ['', Validators.required]
+    });
   }
-
+  
+  salvar(){
+    console.log(this.formGroup.value);
+  }
 }
