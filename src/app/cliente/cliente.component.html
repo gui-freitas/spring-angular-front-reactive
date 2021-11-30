@@ -4,9 +4,22 @@
         <mat-label>Nome:</mat-label>
         <input formControlName="nome" matInput placeholder="Digite o nome!" />
     </mat-form-field>
+    <div *ngIf="formGroup.controls.nome.errors">
+        <div *ngIf="formGroup.controls.nome.errors.required">
+            O Nome é obrigatório.
+        </div>
+    </div>
     <mat-form-field class="full-width">
         <mat-label>CPF:</mat-label>
         <input formControlName="cpf" matInput placeholder="Digite o CPF!" />
     </mat-form-field>
-    <button mat-button color="primary">Cadastrar</button>
+    <div *ngIf="formGroup.controls.cpf.errors">
+        <div *ngIf="formGroup.controls.cpf.errors.required">
+            O CPF é obrigatório.
+        </div>
+        <div *ngIf="formGroup.controls.cpf.errors.cpfInvalido && !formGroup.controls.cpf.errors.required">
+            CPF inválido. 
+        </div>
+    </div>
+    <button [disabled]="!formGroup.valid" mat-button color="primary" (click)="salvar()">Cadastrar</button>
 </form>

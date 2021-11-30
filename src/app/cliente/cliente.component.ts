@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from '../cliente.service';
+import { ValidadorGenerico } from '../ValidadorGenerico';
 import { Cliente } from './cliente';
 
 @Component({
@@ -20,7 +21,7 @@ export class ClienteComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
       nome: ['', Validators.required],
-      cpf: ['', Validators.required]
+      cpf: ['', [Validators.required, ValidadorGenerico.cpfValido]]
     });
   }
   
