@@ -12,6 +12,7 @@ import { Cliente } from './cliente';
 export class ClienteComponent implements OnInit {
 
   formGroup: FormGroup;
+  clientes: Cliente[] = [];
 
   constructor(
     private clienteService: ClienteService,
@@ -26,6 +27,11 @@ export class ClienteComponent implements OnInit {
   }
   
   salvar(){
-    console.log(this.formGroup.value);
+    const valoresForm = this.formGroup.value;
+    const cliente : Cliente = new Cliente(valoresForm.nome, valoresForm.cpf);
+    this.clienteService.salvar(cliente).subscribe( resposta => {
+      this.clientes.push(resposta);
+      console.log(this.clientes);
+    });
   }
 }
