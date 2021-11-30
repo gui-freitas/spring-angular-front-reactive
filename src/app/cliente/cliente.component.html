@@ -1,25 +1,47 @@
-<mat-toolbar>Contatos</mat-toolbar>
-<form [formGroup]="formGroup" (ngSubmit)="salvar()">
-    <mat-form-field class="full-width">
-        <mat-label>Nome:</mat-label>
-        <input formControlName="nome" matInput placeholder="Digite o nome!" />
-    </mat-form-field>
-    <div *ngIf="formGroup.controls.nome.errors">
-        <div *ngIf="formGroup.controls.nome.errors.required">
-            O Nome é obrigatório.
-        </div>
-    </div>
-    <mat-form-field class="full-width">
-        <mat-label>CPF:</mat-label>
-        <input formControlName="cpf" matInput placeholder="Digite o CPF!" />
-    </mat-form-field>
-    <div *ngIf="formGroup.controls.cpf.errors">
-        <div *ngIf="formGroup.controls.cpf.errors.required">
-            O CPF é obrigatório.
-        </div>
-        <div *ngIf="formGroup.controls.cpf.errors.cpfInvalido && !formGroup.controls.cpf.errors.required">
-            CPF inválido. 
-        </div>
-    </div>
-    <button [disabled]="!formGroup.valid" mat-button color="primary">Cadastrar</button>
-</form>
+<mat-toolbar>
+    <mat-icon>account_box</mat-icon>
+    Clientes 
+</mat-toolbar>
+
+<mat-tab-group>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>list</mat-icon>
+            Lista
+        </ng-template>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>add</mat-icon>
+            Novo
+        </ng-template>
+        <mat-card class="half-width">
+            <mat-card-title>Novo Contato</mat-card-title>
+            <form [formGroup]="formGroup" (ngSubmit)="salvar()">
+                <mat-form-field class="full-width">
+                    <mat-label>Nome:</mat-label>
+                    <input formControlName="nome" matInput placeholder="Digite o nome!" />
+                </mat-form-field>
+                <div *ngIf="formGroup.controls.nome.errors">
+                    <div *ngIf="formGroup.controls.nome.errors.required">
+                        O Nome é obrigatório.
+                    </div>
+                </div>
+                <mat-form-field class="full-width">
+                    <mat-label>CPF:</mat-label>
+                    <input formControlName="cpf" matInput placeholder="Digite o CPF!" />
+                </mat-form-field>
+                <div *ngIf="formGroup.controls.cpf.errors">
+                    <div *ngIf="formGroup.controls.cpf.errors.required">
+                        O CPF é obrigatório.
+                    </div>
+                    <div *ngIf="formGroup.controls.cpf.errors.cpfInvalido && !formGroup.controls.cpf.errors.required">
+                        CPF inválido. 
+                    </div>
+                </div>
+                <button [disabled]="!formGroup.valid" mat-button color="primary">Cadastrar</button>
+            </form>
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>
+
