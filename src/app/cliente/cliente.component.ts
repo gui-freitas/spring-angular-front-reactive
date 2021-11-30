@@ -13,6 +13,7 @@ export class ClienteComponent implements OnInit {
 
   formGroup: FormGroup;
   clientes: Cliente[] = [];
+  colunas = ['nome', 'cpf', 'dataCriacao'];
 
   constructor(
     private clienteService: ClienteService,
