@@ -18,4 +18,8 @@ export class ClienteService {
   salvar(cliente: Cliente) : Observable<Cliente> {
     return this.http.post<Cliente>(this.apiUrl, cliente);
   }
+
+  listar() : Observable<Cliente[]> {
+    return this.http.get<any>(this.apiUrl);
+  }
 }

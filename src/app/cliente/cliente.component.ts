@@ -13,7 +13,7 @@ export class ClienteComponent implements OnInit {
 
   formGroup: FormGroup;
   clientes: Cliente[] = [];
-  colunas = ['nome', 'cpf', 'dataCriacao'];
+  colunas = ['nome', 'cpf', 'dataCadastro'];
 
   constructor(
     private clienteService: ClienteService,
@@ -21,6 +21,11 @@ export class ClienteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.montarFormulario();
+    this.listar();
+  }
+
+  montarFormulario(){
     this.formGroup = this.formBuilder.group({
       nome: ['', Validators.required],
       cpf: ['', [Validators.required, ValidadorGenerico.cpfValido]]
@@ -34,5 +39,11 @@ export class ClienteComponent implements OnInit {
       this.clientes.push(resposta);
       console.log(this.clientes);
     });
+  }
+
+  listar(){
+    this.clienteService.listar().subscribe(response => {
+      this.clientes = response;
+    })
   }
 }
