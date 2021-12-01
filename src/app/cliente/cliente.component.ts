@@ -36,8 +36,8 @@ export class ClienteComponent implements OnInit {
     const valoresForm = this.formGroup.value;
     const cliente : Cliente = new Cliente(valoresForm.nome, valoresForm.cpf);
     this.clienteService.salvar(cliente).subscribe( resposta => {
-      this.clientes.push(resposta);
-      console.log(this.clientes);
+      let lista: Cliente[] = [ ... this.clientes, resposta];
+      this.clientes = lista;
     });
   }
 
