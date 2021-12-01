@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClienteService } from '../cliente.service';
 import { ValidadorGenerico } from '../ValidadorGenerico';
 import { Cliente } from './cliente';
@@ -17,7 +18,8 @@ export class ClienteComponent implements OnInit {
 
   constructor(
     private clienteService: ClienteService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +40,10 @@ export class ClienteComponent implements OnInit {
     this.clienteService.salvar(cliente).subscribe( resposta => {
       let lista: Cliente[] = [ ... this.clientes, resposta];
       this.clientes = lista;
+      this.snackBar.open('Cliente cadastrado!', 'Sucesso', {
+        duration: 2000
+      });
+      this.formGroup.reset();
     });
   }
 
