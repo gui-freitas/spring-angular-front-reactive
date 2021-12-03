@@ -16,11 +16,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClienteComponent } from './cliente/cliente.component';
 import { ClienteService } from './cliente.service';
+import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClienteComponent
+    ClienteComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { ClienteService } from './cliente.service';
     MatSnackBarModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRoutingModule
   ],
   providers: [
     ClienteService
