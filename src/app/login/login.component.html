@@ -1,15 +1,45 @@
+<mat-toolbar color="primary">
+    <mat-icon>account_box</mat-icon>
+    {{ cadastrando ? 'Cadastrar' : 'Entrar' }}
+</mat-toolbar>
 <mat-card>
     <mat-card-content>
         <form [formGroup]="formGroup" (ngSubmit)="entrar()">
-            <mat-form-field class="full-width">
+            <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Usuário:</mat-label>
                 <input formControlName="usuario" matInput placeholder="Digite seu usuário!" />
             </mat-form-field>
-            <mat-form-field class="full-width">
+            <div *ngIf="formGroup.controls.usuario.errors && !formGroup.controls.usuario.pristine">
+                <div *ngIf="formGroup.controls.usuario.errors.required">
+                    O usuário é obrigatório.
+                </div>
+            </div>
+            <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Senha:</mat-label>
-                <input formControlName="senha" matInput placeholder="Digite sua senha!" />
+                <input formControlName="senha" type="password" matInput placeholder="Digite sua senha!" />
             </mat-form-field>
-            <button mat-raised-button color="primary">Entrar</button>
+            <div *ngIf="formGroup.controls.senha.errors && !formGroup.controls.usuario.pristine">
+                <div *ngIf="formGroup.controls.senha.errors.required">
+                    A senha é obrigatória.
+                </div>
+                <div *ngIf="formGroup.controls.senha.errors.minlength">
+                    A senha deve ter 8 ou mais caracteres.
+                  </div>
+            </div>
+            <div *ngIf="!cadastrando">
+                <button [disabled]="!formGroup.valid" mat-raised-button color="primary">Entrar</button>
+                <br />
+                <br />
+                <button mat-icon-button aria-label="." class="left" (click)="prepararCadastrar($event)">
+                    Não possui usuário? Clique aqui para se registrar!
+                    <mat-icon>open_in_new</mat-icon>
+                </button>
+            </div>
+            <div *ngIf="cadastrando">
+                <button [disabled]="!formGroup.valid" mat-raised-button color="primary">Cadastrar</button>
+
+                <button mat-raised-button color="warn" (click)="cancelarCadastro()">Cancelar</button>
+            </div>
         </form>
     </mat-card-content>
 </mat-card>

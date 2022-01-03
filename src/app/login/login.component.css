@@ -11,3 +11,12 @@ mat-card {
 mat-form-field {
     display: block;
 }
+
+.left{
+    margin-left: -300px;
+}
+
+.btn{
+    display: table-cell;
+    width: 490px;
+}

@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,11 @@ export class LoginComponent {
   senha: string;
   erroLogin: boolean;
   formGroup: FormGroup;
+  cadastrando: boolean;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -23,14 +26,26 @@ export class LoginComponent {
 
   montarFormulario(){
     this.formGroup = this.formBuilder.group({
-      usuario: [''],
-      senha: ['']
+      usuario: ['', Validators.required],
+      senha: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
   entrar(){
     const valoresForm = this.formGroup.value;
-    console.log(`User: ${valoresForm.usuario}, Pass: ${valoresForm.senha}`)
+    console.log(`Usuario: ${valoresForm.usuario}, Senha: ${valoresForm.senha}`)
+    this.router.navigate(['/']);
+  }
+
+  prepararCadastrar(event: any){
+    event.preventDefault();
+    this.cadastrando = true;
+  } 
+
+  cancelarCadastro(){
+      this.cadastrando = false;
+      this.usuario = '';
+      this.senha = '';
   }
 
 }
