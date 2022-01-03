@@ -13,10 +13,10 @@ export class LoginComponent {
 
   usuario: string;
   senha: string;
-  erroLogin: boolean;
   formGroup: FormGroup;
   cadastrando: boolean;
   mensagemSucesso: string;
+  erros: String[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,8 +48,7 @@ export class LoginComponent {
 
   cancelarCadastro(){
       this.cadastrando = false;
-      this.usuario = '';
-      this.senha = '';
+      this.formGroup.reset();
   }
 
   cadastrarUsuario(){
@@ -61,10 +60,12 @@ export class LoginComponent {
     this.authService
       .cadastrarUsuario(usuario)
       .subscribe( response => {
-        this.mensagemSucesso = 'Cadastro realizado com sucesso! Efetue o login.';
-        this.erroLogin = false;
-      }, error => {
-        this.erroLogin = true;
+        this.erros = [];
+        this.mensagemSucesso = 'Usuário "' + usuario.username + '" cadastrado com sucesso! Efetue o login.';
+        this.cadastrando = false;
+        this.formGroup.reset();
+      }, errorResponse => {
+        this.erros = errorResponse.error.errors;
         this.mensagemSucesso = '';
       });
   }

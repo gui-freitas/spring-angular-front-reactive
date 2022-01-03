@@ -3,14 +3,17 @@
     {{ cadastrando ? 'Cadastrar' : 'Entrar' }}
 </mat-toolbar>
 <mat-card>
+    <div class="alert alert-sucess" *ngIf="mensagemSucesso">
+        {{ mensagemSucesso }}
+    </div>
+    <div class="alert alert-sucess" *ngFor="let erro of erros">
+        {{ erro }}
+    </div>
     <mat-card-content>
         <form [formGroup]="formGroup" (ngSubmit)="cadastrando ? cadastrarUsuario() :entrar()">
-            <div class="alert alert-sucess" *ngIf="mensagemSucesso">
-                {{ mensagemSucesso }}
-            </div>
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Usuário:</mat-label>
-                <input formControlName="usuario" matInput placeholder="Digite seu usuário!" />
+                <input formControlName="usuario" matInput placeholder="Digite seu usuário!" autocomplete="off"/>
             </mat-form-field>
             <div *ngIf="formGroup.controls.usuario.errors && !formGroup.controls.usuario.pristine">
                 <div *ngIf="formGroup.controls.usuario.errors.required">
