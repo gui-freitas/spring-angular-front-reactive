@@ -18,6 +18,7 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { ClienteService } from './cliente.service';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule
   ],
   providers: [
-    ClienteService
+    ClienteService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

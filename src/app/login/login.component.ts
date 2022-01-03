@@ -1,6 +1,8 @@
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { Usuario } from './usuario';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +16,12 @@ export class LoginComponent {
   erroLogin: boolean;
   formGroup: FormGroup;
   cadastrando: boolean;
+  mensagemSucesso: string;
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +50,23 @@ export class LoginComponent {
       this.cadastrando = false;
       this.usuario = '';
       this.senha = '';
+  }
+
+  cadastrarUsuario(){
+    const valoresForm = this.formGroup.value;
+    const usuario: Usuario = new Usuario();
+    usuario.username = valoresForm.usuario;
+    usuario.password = valoresForm.senha;
+    console.log(usuario);
+    this.authService
+      .cadastrarUsuario(usuario)
+      .subscribe( response => {
+        this.mensagemSucesso = 'Cadastro realizado com sucesso! Efetue o login.';
+        this.erroLogin = false;
+      }, error => {
+        this.erroLogin = true;
+        this.mensagemSucesso = '';
+      });
   }
 
 }

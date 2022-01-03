@@ -4,7 +4,10 @@
 </mat-toolbar>
 <mat-card>
     <mat-card-content>
-        <form [formGroup]="formGroup" (ngSubmit)="entrar()">
+        <form [formGroup]="formGroup" (ngSubmit)="cadastrando ? cadastrarUsuario() :entrar()">
+            <div class="alert alert-sucess" *ngIf="mensagemSucesso">
+                {{ mensagemSucesso }}
+            </div>
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Usuário:</mat-label>
                 <input formControlName="usuario" matInput placeholder="Digite seu usuário!" />
@@ -37,7 +40,6 @@
             </div>
             <div *ngIf="cadastrando">
                 <button [disabled]="!formGroup.valid" mat-raised-button color="primary">Cadastrar</button>
-
                 <button mat-raised-button color="warn" (click)="cancelarCadastro()">Cancelar</button>
             </div>
         </form>
