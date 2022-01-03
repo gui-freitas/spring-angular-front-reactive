@@ -37,13 +37,21 @@ export class LoginComponent {
 
   entrar(){
     const valoresForm = this.formGroup.value;
-    console.log(`Usuario: ${valoresForm.usuario}, Senha: ${valoresForm.senha}`)
-    this.router.navigate(['/']);
+    this.authService
+          .tentarLogar(valoresForm.usuario, valoresForm.senha)
+          .subscribe(response => {
+            this.router.navigate(['/'])
+          }, errorResponse => {
+            this.erros = ['Usuário e/ou senha incorreto(s).']
+          });
+    this.mensagemSucesso = '';
   }
 
   prepararCadastrar(event: any){
     event.preventDefault();
     this.cadastrando = true;
+    this.formGroup.reset();
+    this.erros = [];
   } 
 
   cancelarCadastro(){
@@ -56,7 +64,6 @@ export class LoginComponent {
     const usuario: Usuario = new Usuario();
     usuario.username = valoresForm.usuario;
     usuario.password = valoresForm.senha;
-    console.log(usuario);
     this.authService
       .cadastrarUsuario(usuario)
       .subscribe( response => {
