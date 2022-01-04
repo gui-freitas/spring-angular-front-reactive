@@ -35,6 +35,12 @@
                 <tr mat-header-row *matHeaderRowDef="colunas"></tr>
                 <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
             </table>
+
+            <mat-paginator #paginator [length]="totalElementos"
+                           [pageSize]="tamanhoPagina"
+                           (page)="paginar($event)">
+
+            </mat-paginator>
         </mat-card>
     </mat-tab>
     <mat-tab>

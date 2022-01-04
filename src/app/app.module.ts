@@ -10,8 +10,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { MatSnackBarModule } from '@angular/material/snack-bar'
-import { MatDialogModule } from '@angular/material/dialog'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,6 +42,7 @@ import { ClienteDetalheComponent } from './cliente-detalhe/cliente-detalhe.compo
     MatCardModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatPaginatorModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

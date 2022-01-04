@@ -8,6 +8,7 @@ import { ValidadorGenerico } from '../ValidadorGenerico';
 import { Cliente } from './cliente';
 import { MatDialog } from '@angular/material/dialog';
 import { ClienteDetalheComponent } from '../cliente-detalhe/cliente-detalhe.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-cliente',
@@ -20,6 +21,9 @@ export class ClienteComponent implements OnInit {
   clientes: Cliente[] = [];
   colunas = ['nome', 'cpf', 'dataCadastro'];
   usuarioAutenticado: string;
+  totalElementos: number = 0;
+  pagina: number = 0;
+  tamanhoPagina: number = 5;
 
   constructor(
     private clienteService: ClienteService,
@@ -32,7 +36,7 @@ export class ClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.montarFormulario();
-    this.listar();
+    this.listar(this.pagina, this.tamanhoPagina);
     this.usuarioAutenticado= this.authService.getUsuarioAutenticado();
   }
 
@@ -56,9 +60,11 @@ export class ClienteComponent implements OnInit {
     });
   }
 
-  listar(){
-    this.clienteService.listar().subscribe(response => {
-      this.clientes = response;
+  listar(pagina: number, tamanhoPagina: number){
+    this.clienteService.listar(pagina, tamanhoPagina).subscribe(response => {
+      this.clientes = response.content;
+      this.totalElementos = response.totalElements;
+      this.pagina = response.number;
     })
   }
   
@@ -73,5 +79,10 @@ export class ClienteComponent implements OnInit {
       height: '450px',
       data: cliente
     })
+  }
+
+  paginar(event: PageEvent){
+    this.pagina = event.pageIndex;
+    this.listar(this.pagina, this.tamanhoPagina);
   }
 }
