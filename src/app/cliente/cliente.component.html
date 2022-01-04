@@ -1,8 +1,12 @@
 <mat-toolbar>
     <mat-icon>account_box</mat-icon>
     Clientes 
+    <span class="example-spacer"></span>
+    <button mat-icon-button (click)="logout()">
+        Sair
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
 </mat-toolbar>
-
 <mat-tab-group>
     <mat-tab>
         <ng-template mat-tab-label>

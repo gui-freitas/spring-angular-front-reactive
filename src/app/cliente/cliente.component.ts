@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { ClienteService } from '../cliente.service';
 import { ValidadorGenerico } from '../ValidadorGenerico';
 import { Cliente } from './cliente';
@@ -15,16 +17,20 @@ export class ClienteComponent implements OnInit {
   formGroup: FormGroup;
   clientes: Cliente[] = [];
   colunas = ['nome', 'cpf', 'dataCadastro'];
+  usuarioAutenticado: string;
 
   constructor(
     private clienteService: ClienteService,
     private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.montarFormulario();
     this.listar();
+    this.usuarioAutenticado= this.authService.getUsuarioAutenticado();
   }
 
   montarFormulario(){
@@ -51,5 +57,10 @@ export class ClienteComponent implements OnInit {
     this.clienteService.listar().subscribe(response => {
       this.clientes = response;
     })
+  }
+  
+  logout(){
+    this.authService.encerrarSessao();
+    this.router.navigate(['/login']);
   }
 }
