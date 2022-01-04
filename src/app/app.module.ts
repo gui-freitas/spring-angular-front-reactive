@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatDialogModule } from '@angular/material/dialog'
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,12 +21,14 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth.service';
 import { TokenInterceptor } from './token.interceptor';
+import { ClienteDetalheComponent } from './cliente-detalhe/cliente-detalhe.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClienteComponent,
-    LoginComponent
+    LoginComponent,
+    ClienteDetalheComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { TokenInterceptor } from './token.interceptor';
     MatIconModule,
     MatCardModule,
     MatSnackBarModule,
+    MatDialogModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

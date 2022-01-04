@@ -17,7 +17,9 @@
             <table mat-table [dataSource]="clientes" class="full-width">
                 <ng-container matColumnDef="nome">
                     <th mat-header-cell *matHeaderCellDef> Nome </th>
-                    <td mat-cell *matCellDef="let cliente"> {{ cliente.nome }}</td>
+                    <td mat-cell *matCellDef="let cliente">
+                        <button mat-icon-button color="primary" (click)="visualizarCliente(cliente, $event)">{{ cliente.nome }}</button>
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="cpf">

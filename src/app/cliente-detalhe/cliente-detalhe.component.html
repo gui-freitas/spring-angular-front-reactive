@@ -1,0 +1,19 @@
+<mat-card style="text-align: center;">
+    <mat-card-header>
+        <mat-card-title>
+            <mat-icon>face</mat-icon>
+            Cliente
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            <strong>Nome: </strong> {{ cliente.nome }} <br />
+            <strong>CPF: </strong> {{ cliente.cpf }} <br />
+            <strong>Data de cadastro: </strong> {{ cliente.dataCadastro }} <br />
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="fechar()">
+            Fechar
+        </button>
+    </mat-card-actions>

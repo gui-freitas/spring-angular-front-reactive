@@ -6,6 +6,8 @@ import { AuthService } from '../auth.service';
 import { ClienteService } from '../cliente.service';
 import { ValidadorGenerico } from '../ValidadorGenerico';
 import { Cliente } from './cliente';
+import { MatDialog } from '@angular/material/dialog';
+import { ClienteDetalheComponent } from '../cliente-detalhe/cliente-detalhe.component';
 
 @Component({
   selector: 'app-cliente',
@@ -24,7 +26,8 @@ export class ClienteComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -62,5 +65,13 @@ export class ClienteComponent implements OnInit {
   logout(){
     this.authService.encerrarSessao();
     this.router.navigate(['/login']);
+  }
+
+  visualizarCliente(cliente: Cliente, event: any) {
+    this.dialog.open(ClienteDetalheComponent, {
+      width: '400px',
+      height: '450px',
+      data: cliente
+    })
   }
 }
